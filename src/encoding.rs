@@ -1,4 +1,4 @@
-use base64::{Engine as _, engine::general_purpose};
+use base64::{engine::general_purpose, Engine as _};
 
 #[derive(Debug)]
 pub enum EncodingError {
@@ -34,7 +34,9 @@ pub fn to_base64(bytes: &[u8]) -> String {
 
 /// Decodes standard base64 to bytes
 pub fn from_base64(s: &str) -> Result<Vec<u8>, EncodingError> {
-    general_purpose::STANDARD.decode(s).map_err(|_| EncodingError::InvalidBase64)
+    general_purpose::STANDARD
+        .decode(s)
+        .map_err(|_| EncodingError::InvalidBase64)
 }
 
 /// Encodes bytes as URL-safe base64
@@ -44,13 +46,15 @@ pub fn to_base64_url(bytes: &[u8]) -> String {
 
 /// Decodes URL-safe base64 to bytes
 pub fn from_base64_url(s: &str) -> Result<Vec<u8>, EncodingError> {
-    general_purpose::URL_SAFE_NO_PAD.decode(s).map_err(|_| EncodingError::InvalidBase64)
+    general_purpose::URL_SAFE_NO_PAD
+        .decode(s)
+        .map_err(|_| EncodingError::InvalidBase64)
 }
 
 /// Pretty prints a JSON string
 pub fn pretty_print_json(json: &str) -> Result<String, EncodingError> {
-    let value: serde_json::Value = serde_json::from_str(json)
-        .map_err(|_| EncodingError::InvalidJson)?;
+    let value: serde_json::Value =
+        serde_json::from_str(json).map_err(|_| EncodingError::InvalidJson)?;
     serde_json::to_string_pretty(&value).map_err(|_| EncodingError::InvalidJson)
 }
 

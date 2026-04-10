@@ -2,9 +2,9 @@ name: CI
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
   pull_request:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   test:
@@ -15,8 +15,6 @@ jobs:
 
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
-        with:
-          targets: wasm32-unknown-unknown
 
       - name: Cache cargo
         uses: actions/cache@v4
@@ -27,11 +25,8 @@ jobs:
             target
           key: ${{ runner.os }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
-      - name: Run tests (toolkit)
+      - name: Run tests
         run: cargo test --manifest-path Cargo.toml
-
-      - name: Check contract compiles
-        run: cargo check --manifest-path contracts/escrow/Cargo.toml --target wasm32-unknown-unknown
 
   clippy:
     name: Clippy

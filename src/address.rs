@@ -106,7 +106,7 @@ mod tests {
 
     #[test]
     fn test_mask_address() {
-       assert_eq!(mask_address(VALID_ACCOUNT), "GCEZ...5UMG");
+        assert_eq!(mask_address(VALID_ACCOUNT), "GCEZ...5UMG");
     }
 
     #[test]

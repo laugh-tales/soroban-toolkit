@@ -1,8 +1,6 @@
 #![no_std]
 
-use soroban_sdk::{
-    contract, contractimpl, contracttype, token, Address, Env, Symbol,
-};
+use soroban_sdk::{contract, contractimpl, contracttype, token, Address, Env, Symbol};
 
 #[contracttype]
 #[derive(Clone, Debug, Eq, PartialEq)]
@@ -83,10 +81,8 @@ impl EscrowContract {
             .instance()
             .set(&DataKey::EscrowCount, &escrow_id);
 
-        env.events().publish(
-            (Symbol::new(&env, "escrow_created"),),
-            (escrow_id,),
-        );
+        env.events()
+            .publish((Symbol::new(&env, "escrow_created"),), (escrow_id,));
 
         escrow_id
     }
@@ -118,10 +114,8 @@ impl EscrowContract {
             .instance()
             .set(&DataKey::Escrow(escrow_id), &escrow);
 
-        env.events().publish(
-            (Symbol::new(&env, "escrow_released"),),
-            (escrow_id,),
-        );
+        env.events()
+            .publish((Symbol::new(&env, "escrow_released"),), (escrow_id,));
     }
 
     /// Refund to depositor
@@ -157,10 +151,8 @@ impl EscrowContract {
             .instance()
             .set(&DataKey::Escrow(escrow_id), &escrow);
 
-        env.events().publish(
-            (Symbol::new(&env, "escrow_refunded"),),
-            (escrow_id,),
-        );
+        env.events()
+            .publish((Symbol::new(&env, "escrow_refunded"),), (escrow_id,));
     }
 
     /// Get escrow details
@@ -199,9 +191,7 @@ impl EscrowContract {
             .instance()
             .set(&DataKey::Escrow(escrow_id), &escrow);
 
-        env.events().publish(
-            (Symbol::new(&env, "escrow_disputed"),),
-            (escrow_id,),
-        );
+        env.events()
+            .publish((Symbol::new(&env, "escrow_disputed"),), (escrow_id,));
     }
 }
