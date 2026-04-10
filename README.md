@@ -32,7 +32,27 @@ Soroban Escrow is an open-source decentralized escrow system built on Stellar's 
 ---
 
 ## 🏗️ Project Structure
----
+
+```
+soroban-toolkit/
+├── contracts/
+│   └── escrow/
+│       ├── src/
+│       │   └── lib.rs        # Soroban smart contract
+│       └── Cargo.toml
+├── src/
+│   ├── address.rs            # Address utilities
+│   ├── encoding.rs           # Hex/Base64 encoding
+│   ├── hash.rs               # Hashing utilities
+│   ├── transaction.rs        # XLM formatting
+│   └── main.rs               # CLI entry point
+├── docs/
+│   ├── ARCHITECTURE.md       # System design
+│   └── DEPLOYMENT.md         # Deployment guide
+└── .github/
+    └── workflows/
+        └── ci.yml            # CI pipeline
+```
 
 ## 🚀 Quick Start
 
